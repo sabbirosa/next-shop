@@ -42,7 +42,7 @@ interface Product {
 }
 
 export default function ProductsManagementPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -104,8 +104,8 @@ export default function ProductsManagementPage() {
       let bValue = b[sortBy as keyof Product] as unknown as number | string | boolean | undefined;
       
       if (sortBy === "createdAt") {
-        aValue = new Date(aValue).getTime();
-        bValue = new Date(bValue).getTime();
+        aValue = new Date(aValue as string | number | Date).getTime();
+        bValue = new Date(bValue as string | number | Date).getTime();
       }
       
       if (aValue === bValue) return 0;

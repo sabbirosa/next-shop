@@ -7,11 +7,12 @@ import { NextRequest, NextResponse } from 'next/server';
 // GET /api/products/[id] - Fetch single product
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect();
-    const product = await Product.findById(params.id);
+    const { id } = await params;
+    const product = await Product.findById(id);
     
     if (!product) {
       return NextResponse.json(
@@ -33,7 +34,7 @@ export async function GET(
 // PUT /api/products/[id] - Update a product (protected)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -43,8 +44,9 @@ export async function PUT(
 
     await dbConnect();
     const body = await request.json();
+    const { id } = await params;
 
-    const updated = await Product.findByIdAndUpdate(params.id, body, { new: true });
+    const updated = await Product.findByIdAndUpdate(id, body, { new: true });
     if (!updated) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
@@ -58,7 +60,7 @@ export async function PUT(
 // DELETE /api/products/[id] - Delete a product (protected)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -67,7 +69,8 @@ export async function DELETE(
     }
 
     await dbConnect();
-    const deleted = await Product.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const deleted = await Product.findByIdAndDelete(id);
     if (!deleted) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }

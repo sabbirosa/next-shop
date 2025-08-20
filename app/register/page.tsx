@@ -97,7 +97,7 @@ export default function RegisterPage() {
       } else {
         setErrorMsg(data.error || "Failed to create account");
       }
-    } catch (error) {
+    } catch {
       setErrorMsg("An error occurred during registration");
     } finally {
       setIsLoading(false);

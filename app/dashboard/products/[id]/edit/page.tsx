@@ -22,7 +22,7 @@ interface ProductFormData {
 }
 
 export default function EditProductPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const params = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,7 @@ export default function EditProductPage() {
           category: data.category,
           inStock: data.inStock,
         });
-      } catch (e) {
+      } catch {
         toast.error("Failed to load product");
       } finally {
         setLoading(false);
@@ -94,7 +94,7 @@ export default function EditProductPage() {
       if (!res.ok) throw new Error("Failed to save");
       toast.success("Product updated");
       router.push("/dashboard/products");
-    } catch (e) {
+    } catch {
       toast.error("Failed to update product");
     } finally {
       setSaving(false);

@@ -44,7 +44,7 @@ export default function LoginPage() {
       } else {
         router.push("/products");
       }
-    } catch (error) {
+    } catch {
       setErrorMsg("An error occurred during login");
     } finally {
       setIsLoading(false);
@@ -152,7 +152,7 @@ export default function LoginPage() {
             </form>
 
             <div className="text-center text-sm text-foreground/60">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/register" className="text-blue-600 hover:underline">
                 Sign up here
               </Link>
