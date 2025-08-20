@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Chrome } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ export default function LoginPage() {
     email: "",
     password: ""
   });
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     if (session) {
@@ -29,7 +30,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setErrorMsg("");
 
     try {
       const result = await signIn("credentials", {
@@ -39,12 +40,12 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError(result.error);
+        setErrorMsg(result.error);
       } else {
         router.push("/products");
       }
     } catch (error) {
-      setError("An error occurred during login");
+      setErrorMsg("An error occurred during login");
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +73,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <img src="/next-shop-icon.png" alt="NextShop" className="h-12 w-12" />
+            <Image src="/next-shop-icon.png" alt="NextShop" className="h-12 w-12" />
             <span className="text-3xl font-bold">NextShop</span>
           </Link>
         </div>
@@ -135,9 +136,9 @@ export default function LoginPage() {
                 />
               </div>
 
-              {error && (
+              {errorMsg && (
                 <div className="text-red-500 text-sm text-center">
-                  {error}
+                  {errorMsg}
                 </div>
               )}
 

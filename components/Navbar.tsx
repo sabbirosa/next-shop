@@ -3,6 +3,7 @@
 import { useCart } from "@/providers/cart-provider";
 import { LogOut, Menu, ShoppingCart, User, X } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import ShoppingCartDrawer from "./ShoppingCartDrawer";
@@ -25,7 +26,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <img src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
+            <Image src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
             <span className="text-xl font-bold">NextShop</span>
           </Link>
 

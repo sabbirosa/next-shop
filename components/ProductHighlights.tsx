@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, ShoppingCart, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
@@ -101,7 +102,7 @@ export default function ProductHighlights() {
             >
               {/* Product Image */}
               <div className="aspect-square overflow-hidden">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

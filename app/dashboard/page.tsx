@@ -6,11 +6,14 @@ import { BarChart3, Package, Plus, Settings, Users } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [inStockCount, setInStockCount] = useState<number>(0);
+  const [avgPrice, setAvgPrice] = useState<number>(0);
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -18,6 +21,21 @@ export default function DashboardPage() {
       router.push("/login");
     }
   }, [status, router]);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const data: { inStock: boolean; price: number }[] = await res.json();
+          setTotalProducts(data.length);
+          setInStockCount(data.filter((p) => p.inStock).length);
+          setAvgPrice(data.length ? Math.round(data.reduce((s, p) => s + (p.price || 0), 0) / data.length) : 0);
+        }
+      } catch {}
+    };
+    if (status === 'authenticated') load();
+  }, [status]);
 
   if (status === "loading") {
     return (
@@ -64,7 +82,7 @@ export default function DashboardPage() {
       title: "Analytics",
       description: "View sales reports and analytics",
       icon: BarChart3,
-      href: "#",
+      href: "/dashboard/analytics",
       color: "text-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-950"
     },
@@ -96,7 +114,7 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-foreground/60">Total Products</p>
-                  <p className="text-2xl font-bold">24</p>
+                  <p className="text-2xl font-bold">{totalProducts}</p>
                 </div>
                 <Package className="h-8 w-8 text-blue-600" />
               </div>
@@ -107,8 +125,8 @@ export default function DashboardPage() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-foreground/60">Total Users</p>
-                  <p className="text-2xl font-bold">156</p>
+                  <p className="text-sm font-medium text-foreground/60">In Stock</p>
+                  <p className="text-2xl font-bold">{inStockCount}</p>
                 </div>
                 <Users className="h-8 w-8 text-green-600" />
               </div>
@@ -120,7 +138,7 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-foreground/60">Revenue</p>
-                  <p className="text-2xl font-bold">৳45,999</p>
+                  <p className="text-2xl font-bold">৳{avgPrice}</p>
                 </div>
                 <BarChart3 className="h-8 w-8 text-purple-600" />
               </div>

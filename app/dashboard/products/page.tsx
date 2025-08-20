@@ -5,24 +5,25 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-    ArrowUpDown,
-    Edit,
-    Eye,
-    Filter,
-    MoreHorizontal,
-    Package,
-    Plus,
-    Search,
-    Trash2
+  ArrowUpDown,
+  Edit,
+  Eye,
+  Filter,
+  MoreHorizontal,
+  Package,
+  Plus,
+  Search,
+  Trash2
 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -99,19 +100,19 @@ export default function ProductsManagementPage() {
       return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
-      let aValue: any = a[sortBy as keyof Product];
-      let bValue: any = b[sortBy as keyof Product];
+      let aValue = a[sortBy as keyof Product] as unknown as number | string | boolean | undefined;
+      let bValue = b[sortBy as keyof Product] as unknown as number | string | boolean | undefined;
       
       if (sortBy === "createdAt") {
         aValue = new Date(aValue).getTime();
         bValue = new Date(bValue).getTime();
       }
       
-      if (sortOrder === "asc") {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
+      if (aValue === bValue) return 0;
+      if (aValue == null) return 1;
+      if (bValue == null) return -1;
+      const asc = sortOrder === "asc";
+      return (aValue > bValue ? 1 : -1) * (asc ? 1 : -1);
     });
 
   const categories = ["all", ...Array.from(new Set(products.map(p => p.category)))];
@@ -305,7 +306,7 @@ export default function ProductsManagementPage() {
                       <tr key={product._id} className="border-b hover:bg-muted/50">
                         <td className="p-4">
                           <div className="flex items-center space-x-3">
-                            <img
+                            <Image
                               src={product.image}
                               alt={product.name}
                               className="h-12 w-12 rounded-lg object-cover"

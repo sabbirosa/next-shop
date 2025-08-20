@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import ConditionalFooter from "@/components/ConditionalFooter";
 import Navbar from "@/components/Navbar";
 import { CartProvider } from "@/providers/cart-provider";
 import { SessionProvider } from "@/providers/session-provider";
@@ -47,7 +47,7 @@ export default function RootLayout({
                   {children}
                   <Toaster richColors />
                 </main>
-                <Footer />
+                <ConditionalFooter />
               </div>
             </CartProvider>
           </ThemeProvider>

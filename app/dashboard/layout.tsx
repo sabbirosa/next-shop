@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 h-8">
             <SidebarTrigger />
-            <span className="font-semibold">Dashboard</span>
+            <span className="font-semibold truncate group-data-[collapsible=icon]:hidden">Dashboard</span>
           </div>
         </SidebarHeader>
         <SidebarSeparator />
@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   <SidebarMenuButton asChild>
                     <Link href="/dashboard">
                       <Home />
-                      <span>Overview</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Overview</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   <SidebarMenuButton asChild>
                     <Link href="/dashboard/add-product">
                       <Plus />
-                      <span>Add Product</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Add Product</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -41,7 +41,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   <SidebarMenuButton asChild>
                     <Link href="/dashboard/products">
                       <Package />
-                      <span>Products</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Products</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -49,15 +49,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   <SidebarMenuButton asChild>
                     <Link href="#">
                       <Users />
-                      <span>Users</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Users</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <Link href="#">
+                    <Link href="/dashboard/analytics">
                       <BarChart3 />
-                      <span>Analytics</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Analytics</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   <SidebarMenuButton asChild>
                     <Link href="#">
                       <Settings />
-                      <span>Settings</span>
+                      <span className="truncate group-data-[collapsible=icon]:hidden">Settings</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

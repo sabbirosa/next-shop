@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Chrome, Lock, Mail, MapPin, Phone, User } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,9 +15,19 @@ export default function RegisterPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState("");
-  const [formData, setFormData] = useState({
+  type Address = { street: string; city: string; district: string; postalCode: string };
+  type RegisterForm = {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    phone: string;
+    address: Address;
+  };
+
+  const [formData, setFormData] = useState<RegisterForm>({
     name: "",
     email: "",
     password: "",
@@ -39,18 +50,18 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setErrorMsg("");
     setSuccess("");
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setErrorMsg("Passwords do not match");
       setIsLoading(false);
       return;
     }
 
     if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setErrorMsg("Password must be at least 6 characters");
       setIsLoading(false);
       return;
     }
@@ -84,10 +95,10 @@ export default function RegisterPage() {
           address: { street: "", city: "", district: "", postalCode: "" }
         });
       } else {
-        setError(data.error || "Failed to create account");
+        setErrorMsg(data.error || "Failed to create account");
       }
     } catch (error) {
-      setError("An error occurred during registration");
+      setErrorMsg("An error occurred during registration");
     } finally {
       setIsLoading(false);
     }
@@ -97,19 +108,23 @@ export default function RegisterPage() {
     signIn("google", { callbackUrl: "/products" });
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    if (field.includes('.')) {
-      const [parent, child] = field.split('.');
+  const handleInputChange = (
+    field: keyof RegisterForm | `address.${keyof Address}`,
+    value: string
+  ) => {
+    if (typeof field === 'string' && field.startsWith('address.')) {
+      const child = field.split('.')[1] as keyof Address;
       setFormData(prev => ({
         ...prev,
-        [parent]: {
-          ...prev[parent as keyof typeof prev],
-          [child]: value
-        }
+        address: {
+          ...prev.address,
+          [child]: value,
+        },
       }));
-    } else {
-      setFormData(prev => ({ ...prev, [field]: value }));
+      return;
     }
+    const topField = field as keyof RegisterForm;
+    setFormData(prev => ({ ...prev, [topField]: value }));
   };
 
   if (status === "loading") {
@@ -130,7 +145,7 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <img src="/next-shop-icon.png" alt="NextShop" className="h-12 w-12" />
+            <Image src="/next-shop-icon.png" alt="NextShop" className="h-12 w-12" />
             <span className="text-3xl font-bold">NextShop</span>
           </Link>
         </div>
@@ -287,9 +302,9 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {error && (
+              {errorMsg && (
                 <div className="text-red-500 text-sm text-center">
-                  {error}
+                  {errorMsg}
                 </div>
               )}
 

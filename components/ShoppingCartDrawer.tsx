@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useCart } from "@/providers/cart-provider";
 import { CreditCard, Minus, Plus, ShoppingCart, Trash2, Truck } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -49,7 +50,7 @@ export default function ShoppingCartDrawer({ isOpen, onClose }: { isOpen: boolea
                   <Card key={item._id}>
                     <CardContent className="p-4">
                       <div className="flex items-center gap-4">
-                        <img src={item.image} alt={item.name} className="h-16 w-16 rounded-lg object-cover" />
+                        <Image src={item.image} alt={item.name} className="h-16 w-16 rounded-lg object-cover" />
                         <div className="flex-1">
                           <h4 className="font-medium line-clamp-2">{item.name}</h4>
                           <p className="text-lg font-bold text-blue-600">৳{item.price}</p>

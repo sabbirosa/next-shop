@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,11 +10,11 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
-              <img src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
+              <Image src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
               <span className="text-xl font-bold">NextShop</span>
             </Link>
             <p className="text-foreground/70 max-w-xs">
-              Bangladesh's premier online shopping destination. Quality, reliability, and customer satisfaction guaranteed with nationwide delivery.
+              Bangladesh&apos;s premier online shopping destination. Quality, reliability, and customer satisfaction guaranteed with nationwide delivery.
             </p>
           </div>
 

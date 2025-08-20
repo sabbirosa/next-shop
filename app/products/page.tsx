@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from "@/providers/cart-provider";
 import { Filter, Search, ShoppingCart, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -118,7 +119,7 @@ export default function ProductsPage() {
             {filteredProducts.map((product) => (
               <Card key={product._id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="aspect-square overflow-hidden">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/providers/cart-provider";
 import { ArrowLeft, Heart, Share2, ShoppingCart, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -99,7 +100,7 @@ export default function ProductDetailsPage() {
           {/* Product Image */}
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-lg border">
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-cover"
