@@ -26,24 +26,42 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
+            <Image
+              width={32}
+              height={32}
+              src="/next-shop-icon.png"
+              alt="NextShop"
+              className="h-8 w-8"
+            />
             <span className="text-xl font-bold">NextShop</span>
           </Link>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">
+            <Link
+              href="/"
+              className="text-foreground/70 hover:text-foreground transition-colors"
+            >
               Home
             </Link>
-            <Link href="/products" className="text-foreground/70 hover:text-foreground transition-colors">
+            <Link
+              href="/products"
+              className="text-foreground/70 hover:text-foreground transition-colors"
+            >
               Products
             </Link>
             {session && (
               <>
-                <Link href="/dashboard" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/dashboard"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Dashboard
                 </Link>
-                <Link href="/dashboard/add-product" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/dashboard/add-product"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Add Product
                 </Link>
               </>
@@ -67,9 +85,9 @@ export default function Navbar() {
                 </span>
               )}
             </Button>
-            
+
             <ThemeToggle />
-            
+
             {status === "loading" ? (
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
             ) : session ? (
@@ -90,7 +108,11 @@ export default function Navbar() {
             ) : (
               <div className="hidden sm:flex items-center space-x-3">
                 <Link href="/register">
-                  <Button variant="outline" size="sm" className="flex items-center space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center space-x-2"
+                  >
                     <User className="h-4 w-4" />
                     <span className="hidden sm:inline">Sign Up</span>
                   </Button>
@@ -177,7 +199,11 @@ export default function Navbar() {
               ) : (
                 <div className="px-3 py-2 space-y-2">
                   <Link href="/register" className="w-full">
-                    <Button variant="outline" size="sm" className="w-full justify-start">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start"
+                    >
                       <User className="mr-2 h-4 w-4" />
                       Sign Up
                     </Button>
@@ -194,7 +220,10 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      <ShoppingCartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      <ShoppingCartDrawer
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+      />
     </nav>
   );
 }

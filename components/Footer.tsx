@@ -10,11 +10,19 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/next-shop-icon.png" alt="NextShop" className="h-8 w-8" />
+              <Image
+                height={32}
+                width={32}
+                src="/next-shop-icon.png"
+                alt="NextShop"
+                className="h-8 w-8"
+              />
               <span className="text-xl font-bold">NextShop</span>
             </Link>
             <p className="text-foreground/70 max-w-xs">
-              Bangladesh&apos;s premier online shopping destination. Quality, reliability, and customer satisfaction guaranteed with nationwide delivery.
+              Bangladesh&apos;s premier online shopping destination. Quality,
+              reliability, and customer satisfaction guaranteed with nationwide
+              delivery.
             </p>
           </div>
 
@@ -23,22 +31,34 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/products"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/about"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -50,22 +70,34 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/products?category=electronics" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/products?category=electronics"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Electronics
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=fashion" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/products?category=fashion"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Fashion
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=home" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/products?category=home"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Home & Garden
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=sports" className="text-foreground/70 hover:text-foreground transition-colors">
+                <Link
+                  href="/products?category=sports"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
                   Sports & Outdoors
                 </Link>
               </li>
@@ -86,7 +118,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-blue-600" />
-                <span className="text-foreground/70">Dhanmondi, Dhaka, Bangladesh</span>
+                <span className="text-foreground/70">
+                  Dhanmondi, Dhaka, Bangladesh
+                </span>
               </div>
             </div>
           </div>
@@ -95,7 +129,8 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t mt-8 pt-8 text-center">
           <p className="text-foreground/60">
-            © 2024 NextShop. All rights reserved. Built with Next.js and ❤️ for Bangladesh
+            © 2024 NextShop. All rights reserved. Built with Next.js and ❤️ for
+            Bangladesh
           </p>
         </div>
       </div>

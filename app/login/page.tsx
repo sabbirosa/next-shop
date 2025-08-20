@@ -73,7 +73,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <Image src="/next-shop-icon.png" alt="NextShop" className="h-12 w-12" />
+            <Image src="/next-shop-icon.png" alt="NextShop" width={48} height={48} className="h-12 w-12" />
             <span className="text-3xl font-bold">NextShop</span>
           </Link>
         </div>

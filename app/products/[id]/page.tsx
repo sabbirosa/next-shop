@@ -103,6 +103,8 @@ export default function ProductDetailsPage() {
               <Image
                 src={product.image}
                 alt={product.name}
+                width={600}
+                height={600}
                 className="w-full h-full object-cover"
               />
             </div>

@@ -105,6 +105,8 @@ export default function ProductHighlights() {
                 <Image
                   src={product.image}
                   alt={product.name}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
