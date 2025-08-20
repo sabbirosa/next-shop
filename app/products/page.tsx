@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useCart } from "@/providers/cart-provider";
 import { Filter, Search, ShoppingCart, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const { addItem } = useCart();
 
   useEffect(() => {
     fetchProducts();
@@ -148,7 +150,7 @@ export default function ProductsPage() {
                       ৳{product.price}
                     </span>
                     <div className="flex items-center space-x-2">
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" onClick={() => addItem({ _id: product._id, name: product.name, price: product.price, image: product.image })}>
                         <ShoppingCart className="h-4 w-4" />
                       </Button>
                       <Link href={`/products/${product._id}`}>

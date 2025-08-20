@@ -1,36 +1,189 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextShop - Premium Products E-commerce Platform
 
-## Getting Started
+A modern, full-stack e-commerce application built with Next.js 15, featuring authentication, product management, and a beautiful user interface.
 
-First, run the development server:
+## 🚀 Features
 
+- **Public Pages**: Landing page, product listings, and product details
+- **Authentication**: Secure login/register with NextAuth.js
+- **Protected Dashboard**: Add new products (authenticated users only)
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Theme Toggle**: Light/dark mode support
+- **Real-time Data**: MongoDB integration with Mongoose
+- **Modern UI**: Built with shadcn/ui components
+
+## 🛠️ Technologies Used
+
+- **Frontend**: Next.js 15 (App Router), React 19, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Authentication**: NextAuth.js
+- **Database**: MongoDB with Mongoose
+- **State Management**: React hooks
+- **Icons**: Lucide React
+- **Notifications**: Sonner toast
+
+## 📋 Prerequisites
+
+- Node.js 18+ 
+- MongoDB database
+- Google OAuth credentials (for social login)
+
+## 🚀 Installation & Setup
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd next-shop
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Environment Configuration
+Create a `.env.local` file in the root directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+# Database
+MONGODB_URI=your_mongodb_connection_string
 
-## Learn More
+# NextAuth
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret_key
 
-To learn more about Next.js, take a look at the following resources:
+# Google OAuth (optional)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Database Setup
+Ensure your MongoDB database is running and accessible.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Seed the Database (Optional)
+Populate the database with sample products:
 
-## Deploy on Vercel
+```bash
+npm run seed
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 6. Run the Development Server
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📁 Project Structure
+
+```
+next-shop/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   ├── auth/          # Authentication endpoints
+│   │   └── products/      # Product management endpoints
+│   ├── dashboard/         # Protected dashboard pages
+│   ├── login/             # Login page
+│   ├── products/          # Product pages
+│   └── register/          # Registration page
+├── components/             # Reusable UI components
+│   ├── ui/                # shadcn/ui components
+│   ├── Navbar.tsx         # Navigation component
+│   ├── Footer.tsx         # Footer component
+│   └── ...
+├── lib/                    # Utility functions and configurations
+├── models/                 # MongoDB schemas
+├── providers/              # Context providers
+└── scripts/                # Database seeding scripts
+```
+
+## 🛣️ Route Summary
+
+### Public Routes
+- **`/`** - Landing page with hero section and featured products
+- **`/products`** - Product listing page with search and filtering
+- **`/products/[id]`** - Individual product details page
+- **`/login`** - User authentication page
+- **`/register`** - User registration page
+
+### Protected Routes
+- **`/dashboard/add-product`** - Add new products (requires authentication)
+
+### API Endpoints
+- **`/api/auth/[...nextauth]`** - NextAuth.js authentication
+- **`/api/auth/register`** - User registration
+- **`/api/products`** - Product CRUD operations
+- **`/api/products/[id]`** - Individual product operations
+
+## 🔐 Authentication
+
+The application uses NextAuth.js for authentication with the following features:
+
+- **Credential Login**: Email/password authentication
+- **Social Login**: Google OAuth integration
+- **Session Management**: Secure session handling
+- **Protected Routes**: Automatic redirection for unauthenticated users
+
+## 🎨 UI Components
+
+Built with shadcn/ui components for a consistent and modern design:
+
+- **Responsive Design**: Mobile-first approach
+- **Theme Support**: Light/dark mode toggle
+- **Accessibility**: ARIA labels and keyboard navigation
+- **Animations**: Smooth transitions and hover effects
+
+## 🗄️ Database Schema
+
+### User Model
+- Email, password, name
+- Authentication provider
+- Timestamps
+
+### Product Model
+- Name, description, price
+- Category, image URL
+- Stock status, rating
+- Creation timestamp
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Other Platforms
+- **Netlify**: Build command: `npm run build`
+- **Railway**: Supports Node.js applications
+- **DigitalOcean App Platform**: Container-based deployment
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in the GitHub repository
+- Check the documentation
+- Review the code examples
+
+## 🔄 Updates
+
+Stay updated with the latest features and improvements by:
+- Watching the repository
+- Following the release notes
+- Checking the changelog
+
+---
+
+**Built with ❤️ using Next.js 15 and modern web technologies**

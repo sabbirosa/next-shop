@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCart } from "@/providers/cart-provider";
 import { ArrowLeft, Heart, Share2, ShoppingCart, Star } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -25,6 +26,7 @@ export default function ProductDetailsPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { addItem, setOpen } = useCart();
 
   useEffect(() => {
     if (params.id) {
@@ -106,7 +108,7 @@ export default function ProductDetailsPage() {
             
             {/* Action Buttons */}
             <div className="flex gap-3">
-              <Button className="flex-1 h-12">
+              <Button className="flex-1 h-12" onClick={() => { if (product) { addItem({ _id: product._id, name: product.name, price: product.price, image: product.image }); setOpen(true); } }}>
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Add to Cart
               </Button>

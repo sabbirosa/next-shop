@@ -1,7 +1,11 @@
-import { ThemeProvider } from "@/providers/theme-provider";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { CartProvider } from "@/providers/cart-provider";
 import { SessionProvider } from "@/providers/session-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,7 +40,16 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <CartProvider>
+              <div className="min-h-screen bg-background flex flex-col">
+                <Navbar />
+                <main className="flex-1">
+                  {children}
+                  <Toaster richColors />
+                </main>
+                <Footer />
+              </div>
+            </CartProvider>
           </ThemeProvider>
         </SessionProvider>
       </body>
